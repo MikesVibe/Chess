@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="States">
+      <UniqueIdentifier>{2563d8e8-a700-4868-855d-31119b2b71a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{954d87f8-7d51-46a6-920a-8868275ade35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Crucial components">
+      <UniqueIdentifier>{79bb1767-6c63-4391-bc50-865f0abb5013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{997274b3-b5c5-4b94-8575-2582b52676e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games">
+      <UniqueIdentifier>{4fd9d721-a52b-4a63-acec-cceb6359ee06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\ChessGame">
+      <UniqueIdentifier>{30af6bc5-4b74-4190-8261-776f4d2f29bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overall Classes">
+      <UniqueIdentifier>{6be041a4-6066-4960-8761-8ca27d4dc45e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Games\ChessGame\Pieces">
+      <UniqueIdentifier>{a46af6b0-9163-4ad6-9755-099b31c9dff9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MainMenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOverMenu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Crucial components</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Crucial components</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Crucial components</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="PossibleMove.cpp">
+      <Filter>Games\ChessGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Overall Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Piece.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="PositionOnBoard.cpp">
+      <Filter>Games\ChessGame</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessGameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSelectState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>Overall Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Queen.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Bishop.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Knight.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Rook.cpp">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="SideNumbersPanel.cpp">
+      <Filter>Overall Classes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainMenuState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOverMenu.h">
+      <Filter>Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>Crucial components</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSettings.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Crucial components</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PossibleMove.h">
+      <Filter>Games\ChessGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Overall Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Piece.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionOnBoard.h">
+      <Filter>Games\ChessGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ChessGameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSelectState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Overall Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Queen.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Bishop.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>Games\ChessGame\Pieces</Filter>
+    </ClInclude>
+    <ClInclude Include="SideNumbersPanel.h">
+      <Filter>Overall Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
