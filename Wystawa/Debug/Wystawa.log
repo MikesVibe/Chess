@@ -1,10 +1,5 @@
-﻿  App.cpp
-  ChessGameState.cpp
-C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(169,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(203,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(387,20): warning C4018: '<': signed/unsigned mismatch
-  GameOverMenu.cpp
-  MainMenuState.cpp
-  main.cpp
-  Generating Code...
+﻿  ChessGameState.cpp
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(172,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(206,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(390,20): warning C4018: '<': signed/unsigned mismatch
   Wystawa.vcxproj -> C:\Users\Mikolaj\OneDrive\Chess\Debug\Wystawa.exe

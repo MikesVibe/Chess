@@ -52,6 +52,9 @@ int ChessGameState::findIndexOfPiece(sf::Vector2i grid_pos)
 	*/
 	for (int i = 0; i < static_cast<int>(this->chessPieces.size()); i++)
 	{
+		if (this->chessPieces[i]->isDestroyed())
+			continue;
+
 		if(this->chessPieces[i]->getPositionOnGrid() == grid_pos)// && this->chessPieces[i]->getShow())
 			return i;
 	}
