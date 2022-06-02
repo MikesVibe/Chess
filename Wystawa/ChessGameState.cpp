@@ -407,7 +407,7 @@ GameStatus ChessGameState::checkForGameStatus(PieceColor color)
 		if (_possible_moves.size() > 0)
 			return GameStatus::ONGOING;
 
-		if(abs(chessPieces[i]->getType() == 1))
+		if(abs(chessPieces[i]->getType()) == 1)
 			if (King::isInCheck(this->boardAsText, chessPieces[i]->getPositionOnGrid(), chessPieces[i]->getPieceColor()))
 				kingIsCheckmated = true;
 	}
@@ -595,7 +595,7 @@ void ChessGameState::initVariables()
 	this->gameover = false;
 	this->figureIsSelected = false;
 	this->chessPieces.reserve(64);
-	this->playersTurn = PieceColor::BLACK;
+	this->playersTurn = PieceColor::WHITE;
 
 	this->onPassantMove.wasOnPassantMoveMade = false;
 	this->onPassantMove.roundOfOnPassantMove = -1;

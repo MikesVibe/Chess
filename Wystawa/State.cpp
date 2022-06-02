@@ -14,7 +14,6 @@ State::State(StateData* state_data)
     this->gameover = false;
     this->keytime = 0.f;
     this->keytimeMax = 3.f;
-    this->gameStateName = "SnakeGameState";
 }
 
  State::~State()

@@ -38,7 +38,6 @@ protected:
 	float keytimeMax;
 	float gridSize;
 
-	std::string gameStateName;
 
 	//Mouse pos
 	sf::Vector2i mousePosScreen;
