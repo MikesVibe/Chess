@@ -113,18 +113,18 @@ void GameOverMenu::initButtons()
 		sf::Color::White, sf::Color::White, sf::Color::White
 	);
 
-	this->buttons["RESTART"] = new gui::Button(
-		(this->container.getSize().x / 2.f) - (space_between_buttons / 2.f) - width,
-		this->container.getPosition().y + (this->container.getSize().y * 3.f) / 4.f ,
-		width,
-		height,
-		text_offset_y,
-		&this->font, "TRY AGAIN", text_size,
-		sf::Color(0, 102, 255, 255), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
-		sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
-		sf::Color::White, sf::Color::White, sf::Color::White
+	//this->buttons["RESTART"] = new gui::Button(
+	//	(this->container.getSize().x / 2.f) - (space_between_buttons / 2.f) - width,
+	//	this->container.getPosition().y + (this->container.getSize().y * 3.f) / 4.f ,
+	//	width,
+	//	height,
+	//	text_offset_y,
+	//	&this->font, "TRY AGAIN", text_size,
+	//	sf::Color(0, 102, 255, 255), sf::Color(250, 250, 250, 250), sf::Color(20, 20, 20, 50),
+	//	sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0), sf::Color(20, 20, 20, 0),
+	//	sf::Color::White, sf::Color::White, sf::Color::White
 
-	);
+	//);
 }
 
 void GameOverMenu::initTexts()
@@ -140,7 +140,7 @@ void GameOverMenu::initTexts()
 	this->texts["TITLE"]->setFont(this->font);
 	this->texts["TITLE"]->setFillColor(sf::Color(255, 255, 255, 200));
 	this->texts["TITLE"]->setCharacterSize(80);
-	this->texts["TITLE"]->setString("Game Over Loser");
+	this->texts["TITLE"]->setString("Game Over");
 	this->texts["TITLE"]->setPosition(
 		this->container.getPosition().x + this->container.getSize().x / 2.f - this->texts["TITLE"]->getGlobalBounds().width / 2.f,
 		this->container.getPosition().y + this->container.getSize().y / 4.f - this->texts["TITLE"]->getGlobalBounds().height

@@ -510,6 +510,7 @@ void ChessGameState::update(const float& dt)
 
 	if (!this->paused && !this->gameover) //Unpaused update 
 	{
+
 		this->updatePlayerInput(dt);
 		//this->updateChessPiecesVector();
 	}
@@ -731,8 +732,8 @@ void ChessGameState::initGameOverMenu()
 {
 	this->gameOverMenu = new GameOverMenu(*this->window, this->font);
 
-	this->gameOverMenu->addButton("RESTART", 600.f, "Restart");
-	this->gameOverMenu->addButton("QUIT", 700.f, "Quit");
+	//this->gameOverMenu->addButton("RESTART", 600.f, "Restart");
+	this->gameOverMenu->addButton("QUIT", 600.f, "Quit");
 }
 
 
