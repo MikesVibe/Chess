@@ -14,10 +14,11 @@ King::King(GridData* grid_data, PositionOnBoard* piece_position, sf::Vector2i po
 	this->castlingPossible = false;
 }
 
-void King::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> King::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
-	sf::Vector2i new_position;
+	possibleMoves.clear();
 
+	sf::Vector2i new_position;
 
 	int changeInX[8] = { 1,-1,-1, 1, 1, 0,-1, 0 };
 	int changeInY[8] = { -1,-1, 1, 1, 0,-1, 0, 1 };
@@ -40,7 +41,8 @@ void King::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 			//Check if square is not covered
 			if (!isInCheck(piece_position, new_position, this->type))
 			{
-				this->addPossibleMove(possible_moves, new_position);
+				possibleMoves.push_back(new_position);
+
 			}
 			
 			
@@ -53,7 +55,9 @@ void King::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 
 
 	if (isValidCastling(piece_position, Castling::Long, this->type))
-		return;
+		return possibleMoves;
+
+	return possibleMoves;
 }
 
 const bool& King::getWasMoved() const

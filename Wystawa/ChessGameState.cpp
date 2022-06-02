@@ -26,7 +26,7 @@ ChessGameState::ChessGameState(StateData* state_data)
 
 ChessGameState::~ChessGameState()
 {
-	delete this->possibleMoves;
+	//delete this->possibleMoves;
 	delete this->boardAsText;
 	delete this->pmenu;
 	delete this->gameOverMenu;
@@ -90,16 +90,14 @@ void ChessGameState::select(Piece* piece)
 
 void ChessGameState::unselect(Piece* piece)
 {
-	this->possibleMoves->clear();
+	this->possibleMoves.clear();
 	piece->setSelect(false);
 	this->figureIsSelected = false;
 }
 
-void ChessGameState::findLegalMoves(Piece* piece)
+std::vector<sf::Vector2i> ChessGameState::findLegalMovesPositions(Piece* piece)
 {
 	//std::cout << "Is king in check: " << dynamic_cast<King*>(piece)->isInCheck(boardAsText, piece->getPositionOnGrid(), piece->getType()) << std::endl;
-
-	this->possibleMoves->clear();
 
 	//Find legal moves for pawn
 	if (abs(piece->getType()) == 6)
@@ -134,7 +132,7 @@ void ChessGameState::findLegalMoves(Piece* piece)
 			pawn = dynamic_cast<Pawn*>(this->chessPieces[index]);
 			if (pawn->isEnPassantPossible(this->round))
 			{
-				this->possibleMoves->add(left);
+				this->possibleMoves.add(left);
 				this->onPassantMove.roundOfOnPassantMove = this->round;
 				this->onPassantMove.wasOnPassantMoveMade = true;
 				this->onPassantMove.position = left;
@@ -148,7 +146,7 @@ void ChessGameState::findLegalMoves(Piece* piece)
 			pawn = dynamic_cast<Pawn*>(this->chessPieces[index]);
 			if (pawn->isEnPassantPossible(this->round))
 			{
-				possibleMoves->add(right);
+				possibleMoves.add(right);
 				this->onPassantMove.roundOfOnPassantMove = this->round;
 				this->onPassantMove.wasOnPassantMoveMade = true;
 				this->onPassantMove.position = right;
@@ -157,36 +155,44 @@ void ChessGameState::findLegalMoves(Piece* piece)
 	}
 
 	//Finding semilegal moves
-	piece->getSemiLegalMoves(this->boardAsText, *this->possibleMoves);
+	//_possible_moves = piece->getSemiLegalMoves(this->boardAsText, _possible_moves);
 
-	std::vector<Move*> _possbile_moves = possibleMoves->getPossibleMoves();
+	//std::vector<Move*> _possbile_moves = possibleMoves.getPossibleMoves();
+	std::vector<sf::Vector2i> _possbile_moves = piece->getSemiLegalMovesPositions(this->boardAsText);
 
+	std::vector<sf::Vector2i> _possible_move_to_return;
+	_possible_move_to_return.reserve(32);
 
 	sf::Vector2i king_pos = findPositionOfKing(piece->getPieceColor());
 
 	//Check if king would be in check after any of semi legeal moves
-	for (int i = 0; i < possibleMoves->getSize(); i++)
+	for (int i = 0; i < _possbile_moves.size(); i++)
 	{
-
 		//TODO
 		//Make a move, check if after this move king is in check
 		//if yes than remove it from possible moves list
 		//else undo this move but do not delete it from possible moves list
 
 		//this->boardAsText->saveMove();
+		//if (i == 16)
+		//	i = 16;
 
-		this->makeMove(piece, _possbile_moves[i]->getPositionOnGrid(), true);
+		this->makeMove(piece, _possbile_moves[i], true);
 
 		if (abs(piece->getType()) == 1)
-			king_pos = _possbile_moves[i]->getPositionOnGrid();
+			king_pos = _possbile_moves[i];
 
 		
 
-		if (King::isInCheck(this->boardAsText, king_pos, piece->getPieceColor()))
+		if (!King::isInCheck(this->boardAsText, king_pos, piece->getPieceColor()) ||
+			(king_pos.x == -1 && king_pos.y == 1)
+			)
 		{
 			//auto iterator = remove(begin(_possbile_moves), end(_possbile_moves), _possbile_moves[i]);
 			//_possbile_moves.erase(iterator, end(_possbile_moves));
-			this->possibleMoves->remove(_possbile_moves[i]->getPositionOnGrid());
+			_possible_move_to_return.push_back(_possbile_moves[i]);
+
+
 		}
 		this->boardAsText->undoMove();
 
@@ -199,6 +205,8 @@ void ChessGameState::findLegalMoves(Piece* piece)
 		if(this->chessPieces[i]->isTemporarlyDisabled())
 			this->chessPieces[i]->temporaryDisable(false);
 	}
+
+	return _possible_move_to_return;
 }
 
 void ChessGameState::nextPlayersTurn()
@@ -251,6 +259,10 @@ void ChessGameState::makeMove(Piece*& piece, sf::Vector2i new_grid_pos, bool wil
 
 		index_to_return = this->findIndexOfPiece(possition_of_enemy_pawn);
 
+
+		if (index_to_return == -1 && new_grid_pos == this->movesMade.getLastMove().getMoveAfter())
+			index_to_return = this->findIndexOfPiece(this->movesMade.getLastMove().getMoveBefore());
+
 		if(will_be_undone)
 			this->chessPieces[index_to_return]->temporaryDisable();
 		else
@@ -277,6 +289,10 @@ void ChessGameState::makeMove(Piece*& piece, sf::Vector2i new_grid_pos, bool wil
 	else if(!(this->boardAsText->isEmpty(new_grid_pos))) //Check for Standard Move with beating enemy piece
 	{
 		index_to_return = this->findIndexOfPiece(new_grid_pos);
+
+		if(index_to_return == -1 && new_grid_pos == this->movesMade.getLastMove().getMoveAfter())
+			index_to_return = this->findIndexOfPiece(this->movesMade.getLastMove().getMoveBefore());
+
 		if (will_be_undone)
 			this->chessPieces[index_to_return]->temporaryDisable();
 		else
@@ -288,7 +304,7 @@ void ChessGameState::makeMove(Piece*& piece, sf::Vector2i new_grid_pos, bool wil
 
 void ChessGameState::tryToMakeMove(Piece* piece, sf::Vector2i new_grid_pos)
 {
-	if (!this->possibleMoves->contains(new_grid_pos))
+	if (!this->possibleMoves.contains(new_grid_pos))
 		return;
 
 
@@ -298,7 +314,23 @@ void ChessGameState::tryToMakeMove(Piece* piece, sf::Vector2i new_grid_pos)
 	this->boardAsText->saveMove();
 	this->movesMade.addMove(old_grid_pos, new_grid_pos, piece->getType());
 	
-	this->isGameOver(piece->getPieceColor());
+	auto status = this->checkForGameStatus(piece->getPieceColor());
+	if (status != GameStatus::ONGOING)
+	{
+		this->gameover = true;
+		if (status == GameStatus::CHECKMATE)
+		{
+			std::string color_string = (piece->getPieceColor() == PieceColor::WHITE) ? "White" : "Black";
+
+			this->gameOverMenu->setText(color_string + " Wins!!!");
+
+		}
+		else
+		{
+			this->gameOverMenu->setText("Draw");
+			std::cout << "Draw\n";
+		}
+	}
 
 	//this->movesMade.printMoves();
 
@@ -321,17 +353,6 @@ void ChessGameState::tryToMakeMove(Piece* piece, sf::Vector2i new_grid_pos)
 	this->nextPlayersTurn();
 }
 
-//
-//const sf::Vector2i& ChessGameState::findPositionOfKing(int type) const
-//{
-//	for (auto& piece : chessPieces)
-//	{
-//		if (piece->getType() == type)
-//			return piece->getPositionOnGrid();
-//	}
-//
-//	return sf::Vector2i();
-//}
 
 //DEBUG
 void ChessGameState::printGridPos(sf::Vector2i grid_pos)
@@ -357,10 +378,41 @@ void ChessGameState::printPosition(sf::Vector2i position)
 	std::cout << static_cast<char>(65 + position.x) << 8 - position.y << "\n";
 }
 
-bool ChessGameState::isGameOver(PieceColor color)
+GameStatus ChessGameState::checkForGameStatus(PieceColor color)
 {
-	return false;
+	std::vector<sf::Vector2i> _possible_moves;
+
+	bool kingIsCheckmated = false;
+	//Iterate through all pieces
+	for (int i = 0; i < chessPieces.size(); i++)
+	{
+		//Check if piece is enemy, if not then continue the loop
+		if (chessPieces[i]->getPieceColor() == color)
+			continue;
+
+		//Check if piece has been already destroyed
+		if (chessPieces[i]->isDestroyed())
+			continue;
+
+
+		if (i == 18)
+			i = 18;
+		//Find legal moves for particular piece
+		_possible_moves = findLegalMovesPositions(chessPieces[i]);
+
+		//If at least one move is possible return status ONGOING
+		if (_possible_moves.size() > 0)
+			return GameStatus::ONGOING;
+
+		if(abs(chessPieces[i]->getType() == 1))
+			if (King::isInCheck(this->boardAsText, chessPieces[i]->getPositionOnGrid(), chessPieces[i]->getPieceColor()))
+				kingIsCheckmated = true;
+	}
+
+	//If king can not move and no other possible move has been found return status CHECKMATE else STALEMATE
+	return (kingIsCheckmated) ? GameStatus::CHECKMATE : GameStatus::STALEMATE;
 }
+
 
 //---------------------Update Functions---------------------//
 
@@ -380,8 +432,8 @@ void ChessGameState::updatePlayerInput(const float& dt)
 	//Mouse click
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getKeytime())
 	{
-		std::cout << "Grid POSITION: " << this->mousePositionToGrid(this->mousePosView).x 
-			<< ", " << this->mousePositionToGrid(this->mousePosView).y << "\n";
+		//std::cout << "Grid POSITION: " << this->mousePositionToGrid(this->mousePosView).x 
+		//	<< ", " << this->mousePositionToGrid(this->mousePosView).y << "\n";
 
 		//Is something selected
 		if (this->figureIsSelected)
@@ -405,7 +457,10 @@ void ChessGameState::updatePlayerInput(const float& dt)
 					)
 				{
 					this->select(chess_piece);
-					this->findLegalMoves(chess_piece);
+					this->possibleMoves.clear();
+					auto possible_moves_list = this->findLegalMovesPositions(chess_piece);
+					for (auto var : possible_moves_list)
+						this->possibleMoves.add(var);
 					break;
 				}
 				else
@@ -463,7 +518,7 @@ void ChessGameState::update(const float& dt)
 	else
 	{
 		this->gameOverMenu->update(this->mousePosView);
-		//this->updateGameOverMenuButtons();
+		this->updateGameOverMenuButtons();
 	}
 }
 
@@ -493,7 +548,7 @@ void ChessGameState::render(sf::RenderTarget* target)
 		target->draw(*this->chessPieces[i]);
 	}
 
-	target->draw(*this->possibleMoves);
+	target->draw(this->possibleMoves);
 
 	//this->renderMouseCordinates(*this->window);
 
@@ -535,9 +590,9 @@ void ChessGameState::initVariables()
 {
 	this->paused = false;
 	this->gameover = false;
-	figureIsSelected = false;
+	this->figureIsSelected = false;
 	this->chessPieces.reserve(64);
-	this->playersTurn = PieceColor::WHITE;
+	this->playersTurn = PieceColor::BLACK;
 
 	this->onPassantMove.wasOnPassantMoveMade = false;
 	this->onPassantMove.roundOfOnPassantMove = -1;
@@ -659,7 +714,7 @@ void ChessGameState::initChessPieces()
 
 void ChessGameState::initPossibleMove()
 {
-	this->possibleMoves = new PossibleMove(&this->gridData);
+	this->possibleMoves = PossibleMove(&this->gridData);
 }
 
 void ChessGameState::initPauseMenu()
@@ -673,8 +728,8 @@ void ChessGameState::initGameOverMenu()
 {
 	this->gameOverMenu = new GameOverMenu(*this->window, this->font);
 
-	/*this->gameOverMenu->addButton("RESTART", 600.f, "Restart");
-	this->gameOverMenu->addButton("QUIT", 800.f, "Quit");*/
+	this->gameOverMenu->addButton("RESTART", 600.f, "Restart");
+	this->gameOverMenu->addButton("QUIT", 700.f, "Quit");
 }
 
 

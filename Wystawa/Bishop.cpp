@@ -10,10 +10,11 @@ Bishop::Bishop(GridData* grid_data, PositionOnBoard* piece_position, sf::Vector2
 {
 }
 
-void Bishop::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> Bishop::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
-	sf::Vector2i new_position;
+	possibleMoves.clear();
 
+	sf::Vector2i new_position;
 
 	int changeInX[4] = {  1,-1,-1, 1};
 	int changeInY[4] = { -1,-1, 1, 1};
@@ -30,18 +31,22 @@ void Bishop::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& po
 			new_position.x += changeInX[loop];
 			new_position.y += changeInY[loop];
 
-			if (isInsideBoard(new_position) && piece_position->isEmpty(new_position))
+			if (!isInsideBoard(new_position))
+				break;
+
+			if (piece_position->isEmpty(new_position))
 			{
-				this->addPossibleMove(possible_moves, new_position);
+				possibleMoves.push_back(new_position);
 			}
-			else if (this->isInsideBoard(new_position) && piece_position->isEnemy(this->type, piece_position->getType(MatrixToUse::AFTER, new_position)))
+			else if (piece_position->isEnemy(this->type, piece_position->getType(MatrixToUse::AFTER, new_position)))
 			{
-				this->addPossibleMove(possible_moves, new_position);
+				possibleMoves.push_back(new_position);
 				break;
 			}
 			else
 				break;
 		}
 	}
+	return possibleMoves;
 }
 //this->isEnemy(piece_position->getType(new_position))

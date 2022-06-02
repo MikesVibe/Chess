@@ -219,6 +219,11 @@ void MovesHistory::addMove(sf::Vector2i before, sf::Vector2i after, int type)
 
 }
 
+const MoveMade& MovesHistory::getLastMove() const
+{
+	return (this->movesWhite.size() > this->movesBlack.size()) ? *this->movesWhite.at(this->movesWhite.size() - 1) : *this->movesBlack.at(this->movesBlack.size() - 1);
+}
+
 void MovesHistory::printMoves()
 {
 	for (int i = 0; i < this->movesWhite.size(); i++)
@@ -254,4 +259,14 @@ std::string MoveMade::getMoveString()
 	after_string.push_back(8 - after.y + 48);
 
 	return before_string + " " + after_string;
+}
+
+const sf::Vector2i& MoveMade::getMoveBefore() const
+{
+	return this->before;
+}
+
+const sf::Vector2i& MoveMade::getMoveAfter() const
+{
+	return this->after;
 }

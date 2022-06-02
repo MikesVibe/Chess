@@ -62,11 +62,11 @@ void MainMenuState::render(sf::RenderTarget* target)
 	this->renderButtons(*target);
 
 	//Debuging thing
-   //Text mouseText;
+   //sf::Text mouseText;
    //mouseText.setPosition(this->mousePosView.x, this->mousePosView.y + 80);
    //mouseText.setFont(this->font);
    //mouseText.setCharacterSize(20);
-   //stringstream ss;
+   //std::stringstream ss;
    //ss << this->mousePosView.x << " " << this->mousePosView.y;
    //mouseText.setString(ss.str());
 
@@ -173,21 +173,7 @@ void MainMenuState::pushProperState()
 	{
 		this->states->push(new ChessGameState(this->stateData));
 
-		//switch (this->stateData->chosenGame)
-		//{
-		//case 1:
-		//{
-		//	this->states->push(new SnakeGameState(this->stateData));
-		//}
-		//case 2:
-		//{
-		//	this->states->push(new ChessGameState(this->stateData));
-		//}
-		//default:
-		//{
-		//	std::cout << "ERROR::MAINMENUSTATE::Could not load proper game" << std::endl;
-		//}
-		//}
+
 	}
 
 	////Selector

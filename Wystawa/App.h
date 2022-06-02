@@ -7,7 +7,6 @@ public:
 	App();
 	~App();
 
-
 	void endApplication();
 
 	void updateDt();

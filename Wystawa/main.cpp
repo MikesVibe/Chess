@@ -4,7 +4,9 @@
 
 int main()
 {
+	//Initialize time
 	srand(static_cast<unsigned>(time(NULL)));
+
 	App app;
 
 

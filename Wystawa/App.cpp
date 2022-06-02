@@ -19,8 +19,6 @@ App::~App()
 	delete window;
 }
 
-
-
 void App::endApplication()
 {
 	std::cout << "Ending Application!\n";

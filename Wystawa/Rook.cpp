@@ -12,10 +12,11 @@ Rook::Rook(GridData* grid_data, PositionOnBoard* piece_position, sf::Vector2i po
 	this->wasMoved = false;
 }
 
-void Rook::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> Rook::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
-	sf::Vector2i new_position;
+	possibleMoves.clear();
 
+	sf::Vector2i new_position;
 
 	int changeInX[4] = { 1, 0,-1, 0 };
 	int changeInY[4] = { 0,-1, 0, 1 };
@@ -32,23 +33,24 @@ void Rook::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 			new_position.x += changeInX[loop];
 			new_position.y += changeInY[loop];
 
-			if (this->isInsideBoard(new_position))
+			if (!this->isInsideBoard(new_position))
+				break;
+
+			if (piece_position->isEmpty(new_position))
 			{
-				if (piece_position->isEmpty(new_position))
-				{
-					this->addPossibleMove(possible_moves, new_position);
-				}
-				else if (piece_position->isEnemy(this->type, piece_position->getType(new_position)))
-				{
-					this->addPossibleMove(possible_moves, new_position);
-					break;
-				}
-				else
-					break;
-			
+				possibleMoves.push_back(new_position);
 			}
+			else if (piece_position->isEnemy(this->type, piece_position->getType(new_position)))
+			{
+				possibleMoves.push_back(new_position);
+
+				break;
+			}
+			else
+				break;
 		}
 	}
+	return possibleMoves;
 }
 
 const bool& Rook::getWasMoved() const

@@ -99,6 +99,11 @@ void PositionOnBoard::placePiece(sf::Vector2i grid_pos, int piece_type)
 	this->matrixAfter[grid_pos.y][grid_pos.x] = piece_type;
 }
 
+sf::Vector2i PositionOnBoard::findPositionOfKing()
+{
+	return sf::Vector2i();
+}
+
 void PositionOnBoard::saveMove()
 {
 	for (int i = 0; i < 8; i++)

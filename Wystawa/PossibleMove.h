@@ -21,6 +21,8 @@ private:
 class PossibleMove : public sf::Drawable
 {
 public:
+	PossibleMove();
+	PossibleMove(std::vector<Move*> _possible_moves);
 	PossibleMove(GridData* grid_data);
 	~PossibleMove();
 

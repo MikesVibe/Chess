@@ -10,8 +10,10 @@ Knight::Knight(GridData* grid_data, PositionOnBoard* piece_position, sf::Vector2
 {
 }
 
-void Knight::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> Knight::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
+	possibleMoves.clear();
+
 	//Tables with possible moves
 	int changeInX[8] = { 2,2,-2,-2,1,1,-1,-1 };
 	int changeInY[8] = { 1,-1,1,-1,2,-2,2,-2 };
@@ -27,9 +29,10 @@ void Knight::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& po
 		if (this->isInsideBoard(new_position))
 		{
 			if (piece_position->isEmpty(new_position))
-				addPossibleMove(possible_moves, new_position);
+				possibleMoves.push_back(new_position);
 			else if (piece_position->isEnemy(this->type, piece_position->getType(new_position)))
-				this->addPossibleMove(possible_moves, new_position);
+				possibleMoves.push_back(new_position);
 		}
 	}
+	return possibleMoves;
 }

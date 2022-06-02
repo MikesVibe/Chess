@@ -10,8 +10,10 @@ Queen::Queen(GridData* grid_data, PositionOnBoard* piece_position, sf::Vector2i 
 {
 }
 
-void Queen::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> Queen::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
+	possibleMoves.clear();
+
 	sf::Vector2i new_position;
 
 
@@ -34,11 +36,11 @@ void Queen::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& pos
 			{
 				if (piece_position->isEmpty(new_position))
 				{
-					this->addPossibleMove(possible_moves, new_position);
+					possibleMoves.push_back(new_position);
 				}
 				else if (piece_position->isEnemy(this->type, piece_position->getType(new_position)))
 				{
-					this->addPossibleMove(possible_moves, new_position);
+					possibleMoves.push_back(new_position);
 					break;
 				}
 				else
@@ -46,4 +48,5 @@ void Queen::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& pos
 			}
 		}
 	}
+	return possibleMoves;
 }

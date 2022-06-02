@@ -7,8 +7,6 @@
 #include "GameSelectState.h"
 #include "Gui.h"
 
-enum class AvilableGames { Snake = 0, Chess };
-
 
 class MainMenuState : public State
 {

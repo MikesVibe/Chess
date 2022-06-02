@@ -44,6 +44,20 @@ void Move::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 //---------------------------Possible Moves---------------------------//
 
+PossibleMove::PossibleMove()
+{
+}
+
+PossibleMove::PossibleMove(std::vector<Move*> _possible_moves)
+{
+	this->initVariables();
+	for (auto var : _possible_moves)
+	{
+		this->possibleMoves.emplace_back(var);
+
+	}
+}
+
 PossibleMove::PossibleMove(GridData* grid_data)
 	:gridData(grid_data)
 {

@@ -10,7 +10,7 @@ public:
 
 	~Pawn();
 
-	void getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves);
+	std::vector<sf::Vector2i> getSemiLegalMovesPositions(PositionOnBoard* piece_position);
 
 	bool isEnPassantPossible(int round);
 	void activateEnPassant(int round);

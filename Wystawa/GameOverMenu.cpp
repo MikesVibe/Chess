@@ -47,6 +47,12 @@ const bool GameOverMenu::isButtonPressed(const std::string key)
 	return this->buttons[key]->isPressed();
 }
 
+void GameOverMenu::setText(std::string endText)
+{
+	this->texts["TITLE"]->setString(endText);
+
+}
+
 
 void GameOverMenu::addButton(const std::string key, float y, const std::string text)
 {
@@ -81,8 +87,8 @@ void GameOverMenu::render(sf::RenderTarget& target)
 	}
 
 	target.draw(*this->texts["TITLE"]);
-	target.draw(*this->texts["SCORE"]);
-	target.draw(*this->texts["MAX_SCORE"]);
+	//target.draw(*this->texts["SCORE"]);
+	//target.draw(*this->texts["MAX_SCORE"]);
 }
 
 
@@ -127,8 +133,8 @@ void GameOverMenu::initTexts()
 	float width = 250.f;
 
 	this->texts["TITLE"] = new sf::Text();
-	this->texts["SCORE"] = new sf::Text();
-	this->texts["MAX_SCORE"] = new sf::Text();
+	//this->texts["SCORE"] = new sf::Text();
+	//this->texts["MAX_SCORE"] = new sf::Text();
 
 	//Init text
 	this->texts["TITLE"]->setFont(this->font);
@@ -140,7 +146,7 @@ void GameOverMenu::initTexts()
 		this->container.getPosition().y + this->container.getSize().y / 4.f - this->texts["TITLE"]->getGlobalBounds().height
 	);
 
-	this->texts["SCORE"]->setFont(this->font);
+	/*this->texts["SCORE"]->setFont(this->font);
 	this->texts["SCORE"]->setFillColor(sf::Color(255, 255, 255, 200));
 	this->texts["SCORE"]->setCharacterSize(60);
 	this->texts["SCORE"]->setString("SCORE");
@@ -160,8 +166,8 @@ void GameOverMenu::initTexts()
 	this->texts["MAX_SCORE"]->setPosition(this->container.getPosition().x + this->container.getSize().x / 2.f -
 		(space_between_texts / 2.f) - width,
 
-		this->container.getPosition().y + this->container.getSize().y / 4.f * 2.f- this->texts["MAX_SCORE"]->getGlobalBounds().height
-	);
+		this->container.getPosition().y + this->container.getSize().y / 4.f * 2.f- this->texts["MAX_SCORE"]->getGlobalBounds().height*/
+	//);
 }
 
 

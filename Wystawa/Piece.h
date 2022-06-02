@@ -12,6 +12,8 @@ public:
 	MoveMade(sf::Vector2i before, sf::Vector2i after);
 
 	std::string getMoveString();
+	const sf::Vector2i& getMoveBefore()const;
+	const sf::Vector2i& getMoveAfter()const;
 
 private:
 	//TypeOfMove moveType;
@@ -29,6 +31,7 @@ public:
 	~MovesHistory();
 
 	void addMove(sf::Vector2i before, sf::Vector2i after, int type);
+	const MoveMade& getLastMove()const;
 	void printMoves();
 
 private:
@@ -66,7 +69,7 @@ public:
 	bool isEnemy(int type_of_another_piece);
 
 	void addPossibleMove(PossibleMove& possible_moves, sf::Vector2i position);
-	virtual void getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves) = 0;
+	virtual std::vector<sf::Vector2i> getSemiLegalMovesPositions(PositionOnBoard* piece_position) = 0;
 
 	void update();
 
@@ -88,7 +91,7 @@ protected:
 	bool firstMoveAvilale;
 	PieceColor pieceColor;
 
-
+	std::vector<sf::Vector2i> possibleMoves;
 
 private:
 

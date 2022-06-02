@@ -15,9 +15,9 @@ Pawn::~Pawn()
 
 }
 
-void Pawn::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& possible_moves)
+std::vector<sf::Vector2i> Pawn::getSemiLegalMovesPositions(PositionOnBoard* piece_position)
 {
-	
+	possibleMoves.clear();
 
 	sf::Vector2i new_pos, left, right;
 
@@ -27,10 +27,15 @@ void Pawn::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 		//Check for beating pieces
 		left = sf::Vector2i(new_pos.x - 1, new_pos.y);
 		right = sf::Vector2i(new_pos.x + 1, new_pos.y);
-		if (piece_position->isEnemy(this->type, piece_position->getType(left)))
-			this->addPossibleMove(possible_moves, left);
-		if (piece_position->isEnemy(this->type, piece_position->getType(right)))
-			this->addPossibleMove(possible_moves, right);
+
+		if(this->isInsideBoard(left))
+			if (piece_position->isEnemy(this->type, piece_position->getType(left)))
+				possibleMoves.push_back(left);
+
+		if (this->isInsideBoard(right))
+			if (piece_position->isEnemy(this->type, piece_position->getType(right)))
+				possibleMoves.push_back(right);
+
 
 		//new_pos = this->getPositionOnGrid();
 		////En passant
@@ -50,7 +55,7 @@ void Pawn::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 			new_pos = this->moveForward(new_pos);
 			if (piece_position->isEmpty(new_pos))
 			{
-				this->addPossibleMove(possible_moves, new_pos);
+				possibleMoves.push_back(new_pos);
 			}
 			else
 				break;
@@ -59,6 +64,7 @@ void Pawn::getSemiLegalMoves(PositionOnBoard* piece_position, PossibleMove& poss
 				break;
 		}
 	}
+	return possibleMoves;
 }
 
 bool Pawn::isEnPassantPossible(int round)

@@ -1,41 +1,10 @@
-﻿  stdafx.cpp
-  App.cpp
-  Bishop.cpp
+﻿  App.cpp
   ChessGameState.cpp
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\ChessGameState.cpp(197,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(169,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(203,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Mikolaj\OneDrive\Chess\Wystawa\ChessGameState.cpp(387,20): warning C4018: '<': signed/unsigned mismatch
   GameOverMenu.cpp
-  GameSelectState.cpp
-  Grid.cpp
-  King.cpp
-  Knight.cpp
-  Pawn.cpp
-  Piece.cpp
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\Piece.cpp(99,27): warning C4553: '==': result of expression not used; did you intend '='?
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\Piece.cpp(199,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\Piece.cpp(204,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\Piece.cpp(224,20): warning C4018: '<': signed/unsigned mismatch
-  PositionOnBoard.cpp
-  PossibleMove.cpp
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PossibleMove.cpp(65,20): warning C4018: '<': signed/unsigned mismatch
-  Queen.cpp
-  Rook.cpp
-  GraphicsSettings.cpp
-  Gui.cpp
-  main.cpp
   MainMenuState.cpp
-  PauseMenu.cpp
-  SettingsState.cpp
+  main.cpp
   Generating Code...
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PossibleMove.cpp(115): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PossibleMove.cpp(104): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PossibleMove.cpp(108): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PositionOnBoard.cpp(15): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PositionOnBoard.cpp(17): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PositionOnBoard.cpp(23): warning C4172: returning address of local variable or temporary
-C:\Users\Mikolaj\OneDrive\seba polibuda\Wystawa\PositionOnBoard.cpp(25): warning C4172: returning address of local variable or temporary
-  Compiling...
-  SideNumbersPanel.cpp
-  Square.cpp
-  State.cpp
-  Generating Code...
-  Wystawa.vcxproj -> C:\Users\Mikolaj\OneDrive\seba polibuda\Debug\Wystawa.exe
+  Wystawa.vcxproj -> C:\Users\Mikolaj\OneDrive\Chess\Debug\Wystawa.exe

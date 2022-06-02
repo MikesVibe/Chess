@@ -20,7 +20,7 @@ struct OnPassantMove
 	sf::Vector2i position;
 };
 
-
+enum class GameStatus {ONGOING=0, STALEMATE, CHECKMATE};
 
 class ChessGameState : public State
 {
@@ -38,18 +38,17 @@ public:
 	sf::Vector2i findPositionOfKing(PieceColor color);
 	void select(Piece* piece);
 	void unselect(Piece* piece);
-	void findLegalMoves(Piece* piece);
+	std::vector<sf::Vector2i> findLegalMovesPositions(Piece* piece);
 	void nextPlayersTurn();
 	void makeMove(Piece * &piece, sf::Vector2i new_grid_pos, bool will_be_undone = false);
 	void tryToMakeMove(Piece* piece, sf::Vector2i new_grid_pos);
-
 
 	//DEBUG
 	std::string getGridPosString(sf::Vector2i grid_pos);
 	void printGridPos(sf::Vector2i grid_pos);
 	void renderMouseCordinates(sf::RenderTarget& target);
 	void printPosition(sf::Vector2i position);
-	bool isGameOver(PieceColor color);
+	GameStatus checkForGameStatus(PieceColor color);
 
 	void updateInput(const float& dt);
 	void updatePlayerInput(const float& dt);
@@ -73,7 +72,7 @@ private:
 	MovesHistory movesMade;
 
 	PositionOnBoard* boardAsText;
-	PossibleMove* possibleMoves;
+	PossibleMove possibleMoves;
 	PieceColor playersTurn;
 	int round = 0;
 	OnPassantMove onPassantMove;
@@ -83,7 +82,6 @@ private:
 
 	GameOverMenu* gameOverMenu;
 	PauseMenu* pmenu;
-
 	
 private:
 	//Priavte Functions
